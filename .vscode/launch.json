@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TvpssApplication<tvpss>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.tvpss.TvpssApplication",
+            "projectName": "tvpss",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
