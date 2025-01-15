@@ -9,6 +9,16 @@
             "projectName": "tvpss",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-RoleBasedAuthenticationApplication<RoleBasedAuthentication>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.role.implementation.RoleBasedAuthenticationApplication",
+            "projectName": "RoleBasedAuthentication",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
