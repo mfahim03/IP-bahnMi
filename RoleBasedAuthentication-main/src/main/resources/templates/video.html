@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Management System</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/">Home</a>
+        <a href="/activity">Activity</a>
+        <a href="/video">Content</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <div class="content">
+        <h1>Video Management System</h1>
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('youtube')">YouTube Link</div>
+            <div class="tab" onclick="showTab('video')">Video File</div>
+        </div>
+        <div id="youtube" class="tab-content">
+            <form action="/submit-youtube" method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <div class="form-group">
+                    <label for="youtubeLink">YouTube Link:</label>
+                    <input type="text" id="youtubeLink" name="youtubeLink" placeholder="Enter YouTube link" required>
+                </div>
+                <p><h2>Meta Data</h2></p>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="youtubeTitle" name="title" placeholder="Enter title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="youtubeDescription" name="description" placeholder="Enter description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+            <!-- Display YouTube metadata after submission -->
+            <div th:if="${youtubeLink}">
+                <h3>Submitted YouTube Link:</h3>
+                <p><strong>Link:</strong> <span th:text="${youtubeLink}"></span></p>
+                <p><strong>Title:</strong> <span th:text="${title}"></span></p>
+                <p><strong>Description:</strong> <span th:text="${description}"></span></p>
+            </div>
+        </div>
+        <div id="video" class="tab-content hidden">
+            <form action="/submit-video" method="post" enctype="multipart/form-data">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <div class="form-group">
+                    <label for="videoFile">Video File:</label>
+                    <input type="file" id="videoFile" name="videoFile" required>
+                </div>
+                <p><h2>Meta Data</h2></p>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="videoTitle" name="title" placeholder="Enter title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea id="videoDescription" name="description" placeholder="Enter description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+            <!-- Display video file metadata after submission -->
+            <div th:if="${videoFileName}">
+                <h3>Submitted Video File:</h3>
+                <p><strong>File Name:</strong> <span th:text="${videoFileName}"></span></p>
+                <p><strong>Title:</strong> <span th:text="${title}"></span></p>
+                <p><strong>Description:</strong> <span th:text="${description}"></span></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showTab(tabId) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            contents.forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            document.querySelector(`#${tabId}`).classList.remove('hidden');
+            document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
