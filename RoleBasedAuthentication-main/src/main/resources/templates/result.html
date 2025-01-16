@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Equipment Result</title>
+</head>
+<body>
+    <h1>Selected Equipment</h1>
+    <p>Camera Quantity: <span th:text="${equipment.cameraQuantity}"></span></p>
+    <p>Microphone Quantity: <span th:text="${equipment.microphoneQuantity}"></span></p>
+    <p>Green Screen Quantity: <span th:text="${equipment.greenScreenQuantity}"></span></p>
+    <p>Tripod Quantity: <span th:text="${equipment.tripodQuantity}"></span></p>
+    <p>Lighting Quantity: <span th:text="${equipment.lightingQuantity}"></span></p>
+    <p>Grade: <span th:text="${equipment.grade}"></span></p>
+    <a th:href="@{/equipment/update/{id}(id=${equipment.id})}">Update Equipment</a>
+    <br/>
+    <a href="/equipment">Add New Equipment</a>
+</body>
+</html>
