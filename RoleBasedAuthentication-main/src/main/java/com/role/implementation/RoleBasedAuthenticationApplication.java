@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(scanBasePackages = {"com.role.implementation"})
-@EntityScan(basePackages = {"com.role.implementation.model"}) // Scan for entities
-@EnableJpaRepositories(basePackages = {"com.role.implementation.repository"}) // Scan for repositories
+@EntityScan(basePackages = {"com.role.implementation.model"})
+@EnableJpaRepositories(basePackages = {"com.role.implementation.repository"}) 
 public class RoleBasedAuthenticationApplication {
 
     public static void main(String[] args) {

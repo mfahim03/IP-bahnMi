@@ -24,11 +24,10 @@ public class VideoController {
 
     @GetMapping("/video")
     public String video(Model model) {
-        // Fetch all videos from the database
         List<Video> videos = videoRepository.findAll();
-        model.addAttribute("videos", videos); // Pass videos to the template
-        model.addAttribute("videoMetadata", new Video()); // Keep this line for the form
-        return "video"; // Maps to video.html
+        model.addAttribute("videos", videos);
+        model.addAttribute("videoMetadata", new Video()); 
+        return "video"; 
     }
 
     @PostMapping("/submit-youtube")
@@ -45,13 +44,11 @@ public class VideoController {
         video.setYear(year);
         videoRepository.save(video);
 
-        // Add attributes to the model for display (optional)
         model.addAttribute("youtubeLink", youtubeLink);
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("year", year);
 
-        // Redirect to the video page to show the updated list
         return "redirect:/video";
     }
 
@@ -66,12 +63,11 @@ public class VideoController {
             Video video = new Video();
             video.setTitle(title);
             video.setDescription(description);
-            video.setYoutubeLink("N/A"); // Set a default value for YouTube link
-            video.setFileName(videoFile.getOriginalFilename()); // Save the file name
+            video.setYoutubeLink("N/A");
+            video.setFileName(videoFile.getOriginalFilename()); 
             video.setYear(year);
             videoRepository.save(video);
 
-            // Add attributes to the model for display (optional)
             model.addAttribute("videoFileName", videoFile.getOriginalFilename());
             model.addAttribute("title", title);
             model.addAttribute("description", description);
@@ -79,15 +75,13 @@ public class VideoController {
         } else {
             System.out.println("No video file uploaded.");
         }
-
-        // Redirect to the video page to show the updated list
         return "redirect:/video";
     }
 
     @PostMapping("/delete-video")
     public String deleteVideo(@RequestParam Long id) {
-        videoRepository.deleteById(id); // Delete the video by ID
-        return "redirect:/video"; // Redirect to refresh the list
+        videoRepository.deleteById(id); 
+        return "redirect:/video"; 
     }
 
     @GetMapping("/activity")
