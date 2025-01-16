@@ -24,8 +24,11 @@ public class VideoController {
 
     @GetMapping("/video")
     public String video(Model model) {
-        model.addAttribute("videoMetadata", new Video());
-        return "video"; 
+        // Fetch all videos from the database
+        List<Video> videos = videoRepository.findAll();
+        model.addAttribute("videos", videos); // Pass videos to the template
+        model.addAttribute("videoMetadata", new Video()); // Keep this line for the form
+        return "video"; // Maps to video.html
     }
 
     @PostMapping("/submit-youtube")
@@ -42,11 +45,14 @@ public class VideoController {
         video.setYear(year);
         videoRepository.save(video);
 
+        // Add attributes to the model for display (optional)
         model.addAttribute("youtubeLink", youtubeLink);
         model.addAttribute("title", title);
         model.addAttribute("description", description);
+        model.addAttribute("year", year);
 
-        return "video";
+        // Redirect to the video page to show the updated list
+        return "redirect:/video";
     }
 
     @PostMapping("/submit-video")
@@ -56,24 +62,32 @@ public class VideoController {
             @RequestParam String description,
             @RequestParam int year,
             Model model) {
-
         if (!videoFile.isEmpty()) {
             Video video = new Video();
             video.setTitle(title);
             video.setDescription(description);
-            video.setYoutubeLink("N/A"); 
-            video.setFileName(videoFile.getOriginalFilename()); 
-            video.setYear(year); 
+            video.setYoutubeLink("N/A"); // Set a default value for YouTube link
+            video.setFileName(videoFile.getOriginalFilename()); // Save the file name
+            video.setYear(year);
             videoRepository.save(video);
 
+            // Add attributes to the model for display (optional)
             model.addAttribute("videoFileName", videoFile.getOriginalFilename());
             model.addAttribute("title", title);
             model.addAttribute("description", description);
+            model.addAttribute("year", year);
         } else {
             System.out.println("No video file uploaded.");
         }
 
-        return "video"; 
+        // Redirect to the video page to show the updated list
+        return "redirect:/video";
+    }
+
+    @PostMapping("/delete-video")
+    public String deleteVideo(@RequestParam Long id) {
+        videoRepository.deleteById(id); // Delete the video by ID
+        return "redirect:/video"; // Redirect to refresh the list
     }
 
     @GetMapping("/activity")

@@ -34,94 +34,14 @@
             </select>
         </div>
 
-        <div class="activity-container">
-            <!-- Hardcoded video data -->
-            <div class="activity-section" data-year="2024">
-                <h2>2024</h2>
-                <div class="activity-item">
-                    <h3>TVPSS</h3>
-                    <p>IKON TVPSS SMK Tebobon</p>
-                    <div>
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/asFOgq60NpQ?si=22zn4b4B3rli_9VX" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-
-            <div class="activity-section" data-year="2024">
-                <h2>2024</h2>
-                <div class="activity-item">
-                    <h3>TVPSS SKKJ</h3>
-                    <p> Sambutan Hari Lahir Guru Besar, Guru-guru dan Murid Sesi Julai - Disember 2024</p>
-                    <div>
-                        <iframe 
-                        width="560" 
-                        height="315" 
-                        src="https://www.youtube.com/embed/v3FP6G3DTlQ?si=G3NVsGL3xkGcmfJu" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-
-            <div class="activity-section" data-year="2024">
-                <h2>2024</h2>
-                <div class="activity-item">
-                    <h3>TVPSS SKKJ</h3>
-                    <p> Majlis Kecemerlangan Akademik Peringkat Sekolah Sesi 2024/2025</p>
-                    <div>
-                        <iframe 
-                        width="560" 
-                        height="315" 
-                        src="https://www.youtube.com/embed/Dsm8Yq6kstE?si=GWsgLkK92jQdcgMG" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-
-            <div class="activity-section" data-year="2023">
-                <h2>2023</h2>
-                <div class="activity-item">
-                    <h3>TVPSS SMK DATO SULAIMAN</h3>
-                    <p> HARI ANUGERAH KOKURIKULUM DAN HAL EHWAL MURID (VERSI 2) (EP3.1)</p>
-                    <div>
-                        <iframe width="560" 
-                        height="315" 
-                        src="https://www.youtube.com/embed/3wLJslcHZcQ?si=L94tTxHdf5UjaImV" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
-                        allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dynamically generate activity sections based on year -->
             <div th:each="yearGroup : ${videosByYear}">
                 <div class="activity-section" th:attr="data-year=${yearGroup.key}">
                     <h2 th:text="${yearGroup.key}">Year</h2>
-                    <!-- Dynamically generate activity items for each video -->
+  
                     <div th:each="video : ${yearGroup.value}" class="activity-item">
                         <h3 th:text="${video.title}">Video Title</h3>
                         <p th:text="${video.description}">Video Description</p>
                         <div>
-                            <!-- Check if it's a YouTube link or a video file -->
                             <div th:if="${video.youtubeLink != 'N/A'}">
                                 <iframe width="560" height="315" th:src="${video.youtubeLink}" 
                                     title="YouTube video player" 

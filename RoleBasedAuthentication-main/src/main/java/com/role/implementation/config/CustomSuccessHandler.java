@@ -16,25 +16,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
-	@Override
-public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-        Authentication authentication) throws IOException, ServletException {
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+            Authentication authentication) throws IOException, ServletException {
 
-    String redirectUrl = null;
+        String redirectUrl = null;
 
-    Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-    for (GrantedAuthority grantedAuthority : authorities) {
-        if (grantedAuthority.getAuthority().equals("USER")) {
-            redirectUrl = "/dashboard";
-            break;
-        } else if (grantedAuthority.getAuthority().equals("ADMIN")) {
-            redirectUrl = "/adminScreen";
-            break;
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        for (GrantedAuthority grantedAuthority : authorities) {
+            if (grantedAuthority.getAuthority().equals("USER")) {
+                redirectUrl = "/dashboard";
+                break;
+            } else if (grantedAuthority.getAuthority().equals("ADMIN")) {
+                redirectUrl = "/adminScreen";
+                break;
+            }
         }
+        if (redirectUrl == null) {
+            throw new IllegalStateException();
+        }
+        new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);
     }
-    if (redirectUrl == null) {
-        throw new IllegalStateException();
-    }
-    new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);
-}
 }
