@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activity</title>
+    <title>Video Activity</title>
+    <link rel="stylesheet" type="text/css" href="/activity.css">
     <link rel="stylesheet" type="text/css" href="/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-header">
-            <h2>Dashboard</h2>
+        <div class="logo-container">
+            <img src="/images/tvpss1-removebg-preview.png" alt="TVPSS Logo" class="logo">
         </div>
         <a href="/">Home</a>
         <a href="/activity">Activity</a>
@@ -18,35 +20,141 @@
         <a href="/dashboard">Dashboard</a>
         <a href="/logout">Logout</a>
     </div>
+
+    <!-- Main Content -->
     <div class="content">
-        <h1>Activity</h1>
+        <h1>Video Activity</h1>
+        
+        <!-- Year Filter Dropdown -->
+        <div class="year-filter">
+            <label for="yearFilter">Filter by Year:</label>
+            <select id="yearFilter" onchange="filterVideosByYear()">
+                <option value="all">All Years</option>
+                <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
+            </select>
+        </div>
+
         <div class="activity-container">
-            <div class="activity-section">
-                <h2>2021</h2>
+            <!-- Hardcoded video data -->
+            <div class="activity-section" data-year="2024">
+                <h2>2024</h2>
                 <div class="activity-item">
-                    <h3>Majlis Perpisahan Ericik Norazlan Bin Ahmad</h3>
-                    <p>Transisi tahun 1.2024/2025</p>
+                    <h3>TVPSS</h3>
+                    <p>IKON TVPSS SMK Tebobon</p>
+                    <div>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/asFOgq60NpQ?si=22zn4b4B3rli_9VX" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
             </div>
-            <div class="activity-section">
-                <h2>2022</h2>
+
+            <div class="activity-section" data-year="2024">
+                <h2>2024</h2>
                 <div class="activity-item">
-                    <h3>Anugerah Nilam Daerah Johor Bahru 2024/2025</h3>
-                    <p>Kategori Bahasa Melayu</p>
-                </div>
-                <div class="activity-item">
-                    <h3>Anugerah Nilam Daerah Johor Bahru 2024/2025</h3>
-                    <p>Kategori Bahasa Inggeris</p>
+                    <h3>TVPSS SKKJ</h3>
+                    <p> Sambutan Hari Lahir Guru Besar, Guru-guru dan Murid Sesi Julai - Disember 2024</p>
+                    <div>
+                        <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/v3FP6G3DTlQ?si=G3NVsGL3xkGcmfJu" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
             </div>
-            <div class="activity-section">
+
+            <div class="activity-section" data-year="2024">
+                <h2>2024</h2>
+                <div class="activity-item">
+                    <h3>TVPSS SKKJ</h3>
+                    <p> Majlis Kecemerlangan Akademik Peringkat Sekolah Sesi 2024/2025</p>
+                    <div>
+                        <iframe 
+                        width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/Dsm8Yq6kstE?si=GWsgLkK92jQdcgMG" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-section" data-year="2023">
                 <h2>2023</h2>
                 <div class="activity-item">
-                    <h3>SVIK Kulai</h3>
-                    <p>2021</p>
+                    <h3>TVPSS SMK DATO SULAIMAN</h3>
+                    <p> HARI ANUGERAH KOKURIKULUM DAN HAL EHWAL MURID (VERSI 2) (EP3.1)</p>
+                    <div>
+                        <iframe width="560" 
+                        height="315" 
+                        src="https://www.youtube.com/embed/3wLJslcHZcQ?si=L94tTxHdf5UjaImV" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamically generate activity sections based on year -->
+            <div th:each="yearGroup : ${videosByYear}">
+                <div class="activity-section" th:attr="data-year=${yearGroup.key}">
+                    <h2 th:text="${yearGroup.key}">Year</h2>
+                    <!-- Dynamically generate activity items for each video -->
+                    <div th:each="video : ${yearGroup.value}" class="activity-item">
+                        <h3 th:text="${video.title}">Video Title</h3>
+                        <p th:text="${video.description}">Video Description</p>
+                        <div>
+                            <!-- Check if it's a YouTube link or a video file -->
+                            <div th:if="${video.youtubeLink != 'N/A'}">
+                                <iframe width="560" height="315" th:src="${video.youtubeLink}" 
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    referrerpolicy="strict-origin-when-cross-origin" 
+                                    allowfullscreen></iframe>
+                            </div>
+                            <div th:if="${video.youtubeLink == 'N/A'}">
+                                <p><strong>File Name:</strong> <span th:text="${video.fileName}"></span></p>
+                                <a th:href="@{/files/{fileName}(fileName=${video.fileName})}" target="_blank" class="file-link">View File</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        function filterVideosByYear() {
+            const selectedYear = document.getElementById("yearFilter").value;
+            const activitySections = document.querySelectorAll(".activity-section");
+
+            activitySections.forEach(section => {
+                const year = section.getAttribute("data-year");
+                if (selectedYear === "all" || year === selectedYear) {
+                    section.style.display = "block";
+                } else {
+                    section.style.display = "none";
+                }
+            });
+        }
+    </script>
 </body>
 </html>

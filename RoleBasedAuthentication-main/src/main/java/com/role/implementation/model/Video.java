@@ -1,29 +1,52 @@
 package com.role.implementation.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity // Marks the class as a JPA entity
+@Entity
 public class Video {
 
-    @Id // Marks the field as the primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generates the ID
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private int year;
     private String title;
     private String description;
-    private String tagline;
+
+    @Column(name = "youtubeLink") 
     private String youtubeLink;
 
-    // Getters and Setters
+    @Column(name = "fileName") 
+    private String fileName;
+
+    public Video() {
+    }
+
+    public Video(int year, String title, String description, String youtubeLink, String fileName) {
+        this.year = year;
+        this.title = title;
+        this.description = description;
+        this.youtubeLink = youtubeLink;
+        this.fileName = fileName;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public String getTitle() {
@@ -42,19 +65,19 @@ public class Video {
         this.description = description;
     }
 
-    public String getTagline() {
-        return tagline;
-    }
-
-    public void setTagline(String tagline) {
-        this.tagline = tagline;
-    }
-
     public String getYoutubeLink() {
         return youtubeLink;
     }
 
     public void setYoutubeLink(String youtubeLink) {
         this.youtubeLink = youtubeLink;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

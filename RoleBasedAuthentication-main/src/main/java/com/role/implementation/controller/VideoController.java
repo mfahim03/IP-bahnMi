@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @Controller
 public class VideoController {
 
@@ -21,7 +25,7 @@ public class VideoController {
     @GetMapping("/video")
     public String video(Model model) {
         model.addAttribute("videoMetadata", new Video());
-        return "video"; // Maps to video.html
+        return "video"; 
     }
 
     @PostMapping("/submit-youtube")
@@ -29,25 +33,20 @@ public class VideoController {
             @RequestParam String youtubeLink,
             @RequestParam String title,
             @RequestParam String description,
+            @RequestParam int year,
             Model model) {
-        // Process the YouTube link and metadata
-        System.out.println("YouTube Link: " + youtubeLink);
-        System.out.println("Title: " + title);
-        System.out.println("Description: " + description);
-
-        // Save the YouTube metadata to the database
         Video video = new Video();
         video.setTitle(title);
         video.setDescription(description);
         video.setYoutubeLink(youtubeLink);
+        video.setYear(year);
         videoRepository.save(video);
 
-        // Add the metadata to the model to display on the page
         model.addAttribute("youtubeLink", youtubeLink);
         model.addAttribute("title", title);
         model.addAttribute("description", description);
 
-        return "video"; // Redirect back to the video page
+        return "video";
     }
 
     @PostMapping("/submit-video")
@@ -55,21 +54,18 @@ public class VideoController {
             @RequestParam MultipartFile videoFile,
             @RequestParam String title,
             @RequestParam String description,
+            @RequestParam int year,
             Model model) {
-        // Process the video file and metadata
-        if (!videoFile.isEmpty()) {
-            System.out.println("Video File Name: " + videoFile.getOriginalFilename());
-            System.out.println("Title: " + title);
-            System.out.println("Description: " + description);
 
-            // Save the video metadata to the database
+        if (!videoFile.isEmpty()) {
             Video video = new Video();
             video.setTitle(title);
             video.setDescription(description);
-            video.setYoutubeLink("N/A"); // Set a default value or handle accordingly
+            video.setYoutubeLink("N/A"); 
+            video.setFileName(videoFile.getOriginalFilename()); 
+            video.setYear(year); 
             videoRepository.save(video);
 
-            // Add the metadata to the model to display on the page
             model.addAttribute("videoFileName", videoFile.getOriginalFilename());
             model.addAttribute("title", title);
             model.addAttribute("description", description);
@@ -77,6 +73,24 @@ public class VideoController {
             System.out.println("No video file uploaded.");
         }
 
-        return "video"; // Redirect back to the video page
+        return "video"; 
+    }
+
+    @GetMapping("/activity")
+    public String getVideos(Model model) {
+        List<Video> videos = videoRepository.findAll();
+        Map<Integer, List<Video>> videosByYear = videos.stream()
+                .collect(Collectors.groupingBy(Video::getYear));
+
+        List<Integer> years = videos.stream()
+                .map(Video::getYear)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+
+        model.addAttribute("videosByYear", videosByYear);
+        model.addAttribute("years", years);
+
+        return "activity";
     }
 }
