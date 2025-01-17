@@ -2,12 +2,13 @@ package com.role.implementation.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.role.implementation.DTO.UserProfileDTO;
 import com.role.implementation.DTO.UserRegisteredDTO;
 import com.role.implementation.model.User;
 
+public interface DefaultUserService extends UserDetailsService {
 
-public interface DefaultUserService extends UserDetailsService{
+    User save(UserRegisteredDTO userRegisteredDTO);
 
-	User save(UserRegisteredDTO userRegisteredDTO);
-	
+    User updateUserProfile(UserProfileDTO userProfileDTO);
 }

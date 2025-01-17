@@ -2,7 +2,6 @@ package com.role.implementation.model;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,70 +16,84 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	
-	private String name;
-	
-	
-	
-	private String email;
-	
-	private String password;
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "users_role", joinColumns = @JoinColumn(name = "cust_id", referencedColumnName = "id"),
-	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id") )
-	Set<Role> roles = new HashSet<Role>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-	
-	
+    private String name;
+    private String email;
+    private String password;
+    private String bio;
+    private String phoneNumber;
+    private String address;
 
-	
-	
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_role", joinColumns = @JoinColumn(name = "cust_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    Set<Role> roles = new HashSet<Role>();
 
-	public int getId() {
-		return id;
-	}
+    // Getters and Setters
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public Set<Role> getRole() {
-		return roles;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setRole(Role role) {
-		this.roles.add(role);
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	
-	public String getEmail() {
-		return email;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public Set<Role> getRole() {
+        return roles;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
-	
+    public void setRole(Role role) {
+        this.roles.add(role);
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }
