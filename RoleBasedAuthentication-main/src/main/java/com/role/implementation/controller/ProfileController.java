@@ -5,7 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +14,6 @@ import com.role.implementation.DTO.UserProfileDTO;
 import com.role.implementation.model.User;
 import com.role.implementation.repository.UserRepository;
 import com.role.implementation.service.DefaultUserService;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/profile")
@@ -43,10 +40,7 @@ public class ProfileController {
     }
 
     @PostMapping
-    public String updateProfile(@Valid @ModelAttribute("userProfile") UserProfileDTO userProfileDTO, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "profile";
-        }
+    public String updateProfile(@ModelAttribute("userProfile") UserProfileDTO userProfileDTO) {
         userService.updateUserProfile(userProfileDTO);
         return "redirect:/profile";
     }

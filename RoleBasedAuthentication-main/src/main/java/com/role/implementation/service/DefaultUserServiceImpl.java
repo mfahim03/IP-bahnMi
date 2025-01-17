@@ -45,11 +45,12 @@ public class DefaultUserServiceImpl implements DefaultUserService {
 
     @Override
     public User save(UserRegisteredDTO userRegisteredDTO) {
-        Role role = new Role();
-        if (userRegisteredDTO.getRole().equals("USER"))
-            role = roleRepo.findByRole("USER");
-        else if (userRegisteredDTO.getRole().equals("ADMIN"))
-            role = roleRepo.findByRole("ADMIN");
+        Role role = roleRepo.findByRole(userRegisteredDTO.getRole());
+        if (role == null) {
+            role = new Role();
+            role.setRole(userRegisteredDTO.getRole());
+            roleRepo.save(role);
+        }
         User user = new User();
         user.setEmail(userRegisteredDTO.getEmail_id());
         user.setName(userRegisteredDTO.getName());
@@ -59,6 +60,7 @@ public class DefaultUserServiceImpl implements DefaultUserService {
         return userRepo.save(user);
     }
 
+    @Override
     public User updateUserProfile(UserProfileDTO userProfileDTO) {
         User user = userRepo.findByEmail(userProfileDTO.getEmail());
         if (user != null) {

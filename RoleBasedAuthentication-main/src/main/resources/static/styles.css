@@ -222,3 +222,44 @@ h1 {
 .delete-button:hover {
     color: #cc0000;
 }
+
+/* New styles for the "All Users" page */
+.user-box {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+.user-box h3 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #060059;
+}
+
+.user-box p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.sort-options {
+    margin-bottom: 20px;
+}
+
+.sort-options a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #060059;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sort-options a:hover {
+    background-color: #060059;
+    color: white;
+}
