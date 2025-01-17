@@ -15,7 +15,7 @@
         }
         .sidebar {
             width: 250px;
-            background-color: #0c00b3;
+            background-color: #060059;
             color: white;
             height: 100vh;
             position: fixed;
@@ -46,7 +46,7 @@
         .user-box h3 {
             margin: 0;
             font-size: 1.5em;
-            color: #0c00b3;
+            color: #060059;
         }
         .user-box p {
             margin: 5px 0;
@@ -58,7 +58,7 @@
         .sort-options a {
             margin-right: 10px;
             text-decoration: none;
-            color: #0c00b3;
+            color: #060059;
             font-weight: 500;
         }
         .sort-options a:hover {
@@ -88,8 +88,6 @@
         <a href="/dashboard">Home</a>
         <a href="/profile">Profile</a>
         <a href="/activity">Activity</a>
-        <a href="/shootingEquipment">Shooting Equipment</a> <!-- Add link to the new page -->
-        <a href="/video">Content</a>
         <a href="/logout">Logout</a>
     </div>
     <div class="content">
@@ -104,7 +102,7 @@
                 <p><strong>Email:</strong> <span th:text="${user.email}"></span></p>
                 <p><strong>Address:</strong> <span th:text="${user.address}"></span></p>
                 <p><strong>Phone:</strong> <span th:text="${user.phoneNumber}"></span></p>
-                <!-- Delete Button -->
+
                 <form th:action="@{/adminScreen/deleteUser}" method="post" style="display: inline;">
                     <input type="hidden" name="id" th:value="${user.id}" />
                     <button type="submit" class="delete-button">Delete</button>

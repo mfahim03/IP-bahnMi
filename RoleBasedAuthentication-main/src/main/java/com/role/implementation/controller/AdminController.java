@@ -32,16 +32,16 @@ public class AdminController {
 
     @GetMapping("/allUsers")
     public String showAllUsers(Model model, @RequestParam(required = false) String sortBy) {
-        List<User> users;
-        if (sortBy != null && sortBy.equals("name")) {
-            users = userRepository.findAllByOrderByNameAsc();
-        } else if (sortBy != null && sortBy.equals("address")) {
-            users = userRepository.findAllByOrderByAddressAsc();
-        } else {
-            users = userRepository.findAll();
-        }
-        model.addAttribute("users", users);
-        return "allUsers";
+    List<User> users;
+    if (sortBy != null && sortBy.equals("name")) {
+        users = userRepository.findAllByOrderByNameAsc();
+    } else if (sortBy != null && sortBy.equals("address")) {
+        users = userRepository.findAllByOrderByAddressAsc();
+    } else {
+        users = userRepository.findAll();
+    }
+    model.addAttribute("users", users);
+    return "allUsers";
     }
 
     @PostMapping("/deleteUser")
