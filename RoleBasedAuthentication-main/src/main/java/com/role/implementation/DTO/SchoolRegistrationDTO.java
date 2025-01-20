@@ -1,29 +1,42 @@
 package com.role.implementation.DTO;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Optional;
+
 public class SchoolRegistrationDTO {
 
+    @NotNull
+    @Size(min = 1, message = "School name cannot be empty")
     private String schoolName;
+
     private boolean branding;
-    private String proofBrandingImage;
-    private String proofBrandingLink;
+    private Optional<String> proofBrandingImage = Optional.empty();
+    private Optional<String> proofBrandingLink = Optional.empty();
+
     private boolean inSchoolRecording;
-    private String proofInSchoolRecordingImage;
-    private String proofInSchoolRecordingLink;
+    private Optional<String> proofInSchoolRecordingImage = Optional.empty();
+    private Optional<String> proofInSchoolRecordingLink = Optional.empty();
+
     private boolean uploadOnYoutube;
-    private String proofYoutubeUploadImage;
-    private String proofYoutubeUploadLink;
+    private Optional<String> proofYoutubeUploadImage = Optional.empty();
+    private Optional<String> proofYoutubeUploadLink = Optional.empty();
+
     private boolean recordingInsideOutsideSchool;
-    private String proofRecordingInsideOutsideImage;
-    private String proofRecordingInsideOutsideLink;
+    private Optional<String> proofRecordingInsideOutsideImage = Optional.empty();
+    private Optional<String> proofRecordingInsideOutsideLink = Optional.empty();
+
     private boolean collaborateWithAgencies;
-    private String proofCollaborateWithAgenciesImage;
-    private String proofCollaborateWithAgenciesLink;
+    private Optional<String> proofCollaborateWithAgenciesImage = Optional.empty();
+    private Optional<String> proofCollaborateWithAgenciesLink = Optional.empty();
+
     private boolean logo;
-    private String proofLogoImage;
-    private String proofLogoLink;
+    private Optional<String> proofLogoImage = Optional.empty();
+    private Optional<String> proofLogoLink = Optional.empty();
+
     private boolean greenScreenTechnology;
-    private String proofGreenScreenTechnologyImage;
-    private String proofGreenScreenTechnologyLink;
+    private Optional<String> proofGreenScreenTechnologyImage = Optional.empty();
+    private Optional<String> proofGreenScreenTechnologyLink = Optional.empty();
 
     // Getters and Setters
     public String getSchoolName() {
@@ -42,19 +55,19 @@ public class SchoolRegistrationDTO {
         this.branding = branding;
     }
 
-    public String getProofBrandingImage() {
+    public Optional<String> getProofBrandingImage() {
         return proofBrandingImage;
     }
 
-    public void setProofBrandingImage(String proofBrandingImage) {
+    public void setProofBrandingImage(Optional<String> proofBrandingImage) {
         this.proofBrandingImage = proofBrandingImage;
     }
 
-    public String getProofBrandingLink() {
+    public Optional<String> getProofBrandingLink() {
         return proofBrandingLink;
     }
 
-    public void setProofBrandingLink(String proofBrandingLink) {
+    public void setProofBrandingLink(Optional<String> proofBrandingLink) {
         this.proofBrandingLink = proofBrandingLink;
     }
 
@@ -66,19 +79,19 @@ public class SchoolRegistrationDTO {
         this.inSchoolRecording = inSchoolRecording;
     }
 
-    public String getProofInSchoolRecordingImage() {
+    public Optional<String> getProofInSchoolRecordingImage() {
         return proofInSchoolRecordingImage;
     }
 
-    public void setProofInSchoolRecordingImage(String proofInSchoolRecordingImage) {
+    public void setProofInSchoolRecordingImage(Optional<String> proofInSchoolRecordingImage) {
         this.proofInSchoolRecordingImage = proofInSchoolRecordingImage;
     }
 
-    public String getProofInSchoolRecordingLink() {
+    public Optional<String> getProofInSchoolRecordingLink() {
         return proofInSchoolRecordingLink;
     }
 
-    public void setProofInSchoolRecordingLink(String proofInSchoolRecordingLink) {
+    public void setProofInSchoolRecordingLink(Optional<String> proofInSchoolRecordingLink) {
         this.proofInSchoolRecordingLink = proofInSchoolRecordingLink;
     }
 
@@ -90,19 +103,19 @@ public class SchoolRegistrationDTO {
         this.uploadOnYoutube = uploadOnYoutube;
     }
 
-    public String getProofYoutubeUploadImage() {
+    public Optional<String> getProofYoutubeUploadImage() {
         return proofYoutubeUploadImage;
     }
 
-    public void setProofYoutubeUploadImage(String proofYoutubeUploadImage) {
+    public void setProofYoutubeUploadImage(Optional<String> proofYoutubeUploadImage) {
         this.proofYoutubeUploadImage = proofYoutubeUploadImage;
     }
 
-    public String getProofYoutubeUploadLink() {
+    public Optional<String> getProofYoutubeUploadLink() {
         return proofYoutubeUploadLink;
     }
 
-    public void setProofYoutubeUploadLink(String proofYoutubeUploadLink) {
+    public void setProofYoutubeUploadLink(Optional<String> proofYoutubeUploadLink) {
         this.proofYoutubeUploadLink = proofYoutubeUploadLink;
     }
 
@@ -114,19 +127,19 @@ public class SchoolRegistrationDTO {
         this.recordingInsideOutsideSchool = recordingInsideOutsideSchool;
     }
 
-    public String getProofRecordingInsideOutsideImage() {
+    public Optional<String> getProofRecordingInsideOutsideImage() {
         return proofRecordingInsideOutsideImage;
     }
 
-    public void setProofRecordingInsideOutsideImage(String proofRecordingInsideOutsideImage) {
+    public void setProofRecordingInsideOutsideImage(Optional<String> proofRecordingInsideOutsideImage) {
         this.proofRecordingInsideOutsideImage = proofRecordingInsideOutsideImage;
     }
 
-    public String getProofRecordingInsideOutsideLink() {
+    public Optional<String> getProofRecordingInsideOutsideLink() {
         return proofRecordingInsideOutsideLink;
     }
 
-    public void setProofRecordingInsideOutsideLink(String proofRecordingInsideOutsideLink) {
+    public void setProofRecordingInsideOutsideLink(Optional<String> proofRecordingInsideOutsideLink) {
         this.proofRecordingInsideOutsideLink = proofRecordingInsideOutsideLink;
     }
 
@@ -138,19 +151,19 @@ public class SchoolRegistrationDTO {
         this.collaborateWithAgencies = collaborateWithAgencies;
     }
 
-    public String getProofCollaborateWithAgenciesImage() {
+    public Optional<String> getProofCollaborateWithAgenciesImage() {
         return proofCollaborateWithAgenciesImage;
     }
 
-    public void setProofCollaborateWithAgenciesImage(String proofCollaborateWithAgenciesImage) {
+    public void setProofCollaborateWithAgenciesImage(Optional<String> proofCollaborateWithAgenciesImage) {
         this.proofCollaborateWithAgenciesImage = proofCollaborateWithAgenciesImage;
     }
 
-    public String getProofCollaborateWithAgenciesLink() {
+    public Optional<String> getProofCollaborateWithAgenciesLink() {
         return proofCollaborateWithAgenciesLink;
     }
 
-    public void setProofCollaborateWithAgenciesLink(String proofCollaborateWithAgenciesLink) {
+    public void setProofCollaborateWithAgenciesLink(Optional<String> proofCollaborateWithAgenciesLink) {
         this.proofCollaborateWithAgenciesLink = proofCollaborateWithAgenciesLink;
     }
 
@@ -162,19 +175,19 @@ public class SchoolRegistrationDTO {
         this.logo = logo;
     }
 
-    public String getProofLogoImage() {
+    public Optional<String> getProofLogoImage() {
         return proofLogoImage;
     }
 
-    public void setProofLogoImage(String proofLogoImage) {
+    public void setProofLogoImage(Optional<String> proofLogoImage) {
         this.proofLogoImage = proofLogoImage;
     }
 
-    public String getProofLogoLink() {
+    public Optional<String> getProofLogoLink() {
         return proofLogoLink;
     }
 
-    public void setProofLogoLink(String proofLogoLink) {
+    public void setProofLogoLink(Optional<String> proofLogoLink) {
         this.proofLogoLink = proofLogoLink;
     }
 
@@ -186,19 +199,19 @@ public class SchoolRegistrationDTO {
         this.greenScreenTechnology = greenScreenTechnology;
     }
 
-    public String getProofGreenScreenTechnologyImage() {
+    public Optional<String> getProofGreenScreenTechnologyImage() {
         return proofGreenScreenTechnologyImage;
     }
 
-    public void setProofGreenScreenTechnologyImage(String proofGreenScreenTechnologyImage) {
+    public void setProofGreenScreenTechnologyImage(Optional<String> proofGreenScreenTechnologyImage) {
         this.proofGreenScreenTechnologyImage = proofGreenScreenTechnologyImage;
     }
 
-    public String getProofGreenScreenTechnologyLink() {
+    public Optional<String> getProofGreenScreenTechnologyLink() {
         return proofGreenScreenTechnologyLink;
     }
 
-    public void setProofGreenScreenTechnologyLink(String proofGreenScreenTechnologyLink) {
+    public void setProofGreenScreenTechnologyLink(Optional<String> proofGreenScreenTechnologyLink) {
         this.proofGreenScreenTechnologyLink = proofGreenScreenTechnologyLink;
     }
 }

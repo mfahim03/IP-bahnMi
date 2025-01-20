@@ -1,48 +1,43 @@
 package com.role.implementation.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "school_registration")
 public class SchoolRegistration {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String schoolName;
-
     private boolean branding;
+    private boolean inSchoolRecording;
+    private boolean uploadOnYoutube;
+    private boolean recordingInsideOutsideSchool;
+    private boolean collaborateWithAgencies;
+    private boolean logo;
+    private boolean greenScreenTechnology;
+
+    // Fields for file uploads and URLs
     private String proofBrandingImage;
     private String proofBrandingLink;
 
-    private boolean inSchoolRecording;
     private String proofInSchoolRecordingImage;
     private String proofInSchoolRecordingLink;
 
-    private boolean uploadOnYoutube;
     private String proofYoutubeUploadImage;
     private String proofYoutubeUploadLink;
 
-    private boolean recordingInsideOutsideSchool;
     private String proofRecordingInsideOutsideImage;
     private String proofRecordingInsideOutsideLink;
 
-    private boolean collaborateWithAgencies;
     private String proofCollaborateWithAgenciesImage;
     private String proofCollaborateWithAgenciesLink;
 
-    private boolean logo;
     private String proofLogoImage;
     private String proofLogoLink;
 
-    private boolean greenScreenTechnology;
-    private String proofGreenScreenTechnologyImage;
-    private String proofGreenScreenTechnologyLink;
+    private String proofGreenScreenImage;
+    private String proofGreenScreenLink;
 
     // Getters and Setters
     public Long getId() {
@@ -69,6 +64,55 @@ public class SchoolRegistration {
         this.branding = branding;
     }
 
+    public boolean isInSchoolRecording() {
+        return inSchoolRecording;
+    }
+
+    public void setInSchoolRecording(boolean inSchoolRecording) {
+        this.inSchoolRecording = inSchoolRecording;
+    }
+
+    public boolean isUploadOnYoutube() {
+        return uploadOnYoutube;
+    }
+
+    public void setUploadOnYoutube(boolean uploadOnYoutube) {
+        this.uploadOnYoutube = uploadOnYoutube;
+    }
+
+    public boolean isRecordingInsideOutsideSchool() {
+        return recordingInsideOutsideSchool;
+    }
+
+    public void setRecordingInsideOutsideSchool(boolean recordingInsideOutsideSchool) {
+        this.recordingInsideOutsideSchool = recordingInsideOutsideSchool;
+    }
+
+    public boolean isCollaborateWithAgencies() {
+        return collaborateWithAgencies;
+    }
+
+    public void setCollaborateWithAgencies(boolean collaborateWithAgencies) {
+        this.collaborateWithAgencies = collaborateWithAgencies;
+    }
+
+    public boolean isLogo() {
+        return logo;
+    }
+
+    public void setLogo(boolean logo) {
+        this.logo = logo;
+    }
+
+    public boolean isGreenScreenTechnology() {
+        return greenScreenTechnology;
+    }
+
+    public void setGreenScreenTechnology(boolean greenScreenTechnology) {
+        this.greenScreenTechnology = greenScreenTechnology;
+    }
+
+    // File and URL Getters and Setters
     public String getProofBrandingImage() {
         return proofBrandingImage;
     }
@@ -83,14 +127,6 @@ public class SchoolRegistration {
 
     public void setProofBrandingLink(String proofBrandingLink) {
         this.proofBrandingLink = proofBrandingLink;
-    }
-
-    public boolean isInSchoolRecording() {
-        return inSchoolRecording;
-    }
-
-    public void setInSchoolRecording(boolean inSchoolRecording) {
-        this.inSchoolRecording = inSchoolRecording;
     }
 
     public String getProofInSchoolRecordingImage() {
@@ -109,14 +145,6 @@ public class SchoolRegistration {
         this.proofInSchoolRecordingLink = proofInSchoolRecordingLink;
     }
 
-    public boolean isUploadOnYoutube() {
-        return uploadOnYoutube;
-    }
-
-    public void setUploadOnYoutube(boolean uploadOnYoutube) {
-        this.uploadOnYoutube = uploadOnYoutube;
-    }
-
     public String getProofYoutubeUploadImage() {
         return proofYoutubeUploadImage;
     }
@@ -131,14 +159,6 @@ public class SchoolRegistration {
 
     public void setProofYoutubeUploadLink(String proofYoutubeUploadLink) {
         this.proofYoutubeUploadLink = proofYoutubeUploadLink;
-    }
-
-    public boolean isRecordingInsideOutsideSchool() {
-        return recordingInsideOutsideSchool;
-    }
-
-    public void setRecordingInsideOutsideSchool(boolean recordingInsideOutsideSchool) {
-        this.recordingInsideOutsideSchool = recordingInsideOutsideSchool;
     }
 
     public String getProofRecordingInsideOutsideImage() {
@@ -157,14 +177,6 @@ public class SchoolRegistration {
         this.proofRecordingInsideOutsideLink = proofRecordingInsideOutsideLink;
     }
 
-    public boolean isCollaborateWithAgencies() {
-        return collaborateWithAgencies;
-    }
-
-    public void setCollaborateWithAgencies(boolean collaborateWithAgencies) {
-        this.collaborateWithAgencies = collaborateWithAgencies;
-    }
-
     public String getProofCollaborateWithAgenciesImage() {
         return proofCollaborateWithAgenciesImage;
     }
@@ -179,14 +191,6 @@ public class SchoolRegistration {
 
     public void setProofCollaborateWithAgenciesLink(String proofCollaborateWithAgenciesLink) {
         this.proofCollaborateWithAgenciesLink = proofCollaborateWithAgenciesLink;
-    }
-
-    public boolean isLogo() {
-        return logo;
-    }
-
-    public void setLogo(boolean logo) {
-        this.logo = logo;
     }
 
     public String getProofLogoImage() {
@@ -205,27 +209,19 @@ public class SchoolRegistration {
         this.proofLogoLink = proofLogoLink;
     }
 
-    public boolean isGreenScreenTechnology() {
-        return greenScreenTechnology;
+    public String getProofGreenScreenImage() {
+        return proofGreenScreenImage;
     }
 
-    public void setGreenScreenTechnology(boolean greenScreenTechnology) {
-        this.greenScreenTechnology = greenScreenTechnology;
+    public void setProofGreenScreenImage(String proofGreenScreenImage) {
+        this.proofGreenScreenImage = proofGreenScreenImage;
     }
 
-    public String getProofGreenScreenTechnologyImage() {
-        return proofGreenScreenTechnologyImage;
+    public String getProofGreenScreenLink() {
+        return proofGreenScreenLink;
     }
 
-    public void setProofGreenScreenTechnologyImage(String proofGreenScreenTechnologyImage) {
-        this.proofGreenScreenTechnologyImage = proofGreenScreenTechnologyImage;
-    }
-
-    public String getProofGreenScreenTechnologyLink() {
-        return proofGreenScreenTechnologyLink;
-    }
-
-    public void setProofGreenScreenTechnologyLink(String proofGreenScreenTechnologyLink) {
-        this.proofGreenScreenTechnologyLink = proofGreenScreenTechnologyLink;
+    public void setProofGreenScreenLink(String proofGreenScreenLink) {
+        this.proofGreenScreenLink = proofGreenScreenLink;
     }
 }
