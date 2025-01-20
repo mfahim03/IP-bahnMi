@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration School</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <img src="/images/tvpss1-removebg-preview.png" alt="TVPSS Logo" class="logo">
+        </div>
+        <a href="/dashboard">Home</a>
+        <a href="/profile">Profile</a>
+        <a href="/activity">Activity</a>
+        <a href="/shootingEquipment">Shooting Equipment</a>
+        <a href="/schoolRegistration">School Registration</a> <!-- Added School Registration link -->
+        <a href="/video">Content</a>
+        <a href="/logout">Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>School Registration Form</h1>
+
+        <!-- Success Message -->
+        <div th:if="${param.success}">
+            <p class="success-message">Registration successful!</p>
+        </div>
+
+        <!-- Registration Form -->
+        <form action="/register" method="post" th:object="${registration}">
+            <div class="form-group">
+                <label for="schoolName">School Name:</label>
+                <input type="text" id="schoolName" name="schoolName" th:field="*{schoolName}" required>
+            </div>
+            <div class="form-group">
+                <label>Branding:</label>
+                <input type="checkbox" id="branding" name="branding" th:field="*{branding}">
+                <label for="branding">Corner/mini studio/TV studio</label>
+            </div>
+            <div class="form-group">
+                <label>In-school Recording:</label>
+                <input type="checkbox" id="inSchoolRecording" name="inSchoolRecording" th:field="*{inSchoolRecording}">
+                <label for="inSchoolRecording">Enable in-school recording</label>
+            </div>
+            <div class="form-group">
+                <label>Upload on YouTube:</label>
+                <input type="checkbox" id="uploadOnYoutube" name="uploadOnYoutube" th:field="*{uploadOnYoutube}">
+                <label for="uploadOnYoutube">Enable YouTube uploads</label>
+            </div>
+            <div class="form-group">
+                <label>Recording Inside and Outside School:</label>
+                <input type="checkbox" id="recordingInsideOutsideSchool" name="recordingInsideOutsideSchool" th:field="*{recordingInsideOutsideSchool}">
+                <label for="recordingInsideOutsideSchool">Allow recordings inside and outside school</label>
+            </div>
+            <div class="form-group">
+                <label>Collaborate with External Agencies:</label>
+                <input type="checkbox" id="collaborateWithAgencies" name="collaborateWithAgencies" th:field="*{collaborateWithAgencies}">
+                <label for="collaborateWithAgencies">Enable collaboration</label>
+            </div>
+            <div class="form-group">
+                <label>Logo:</label>
+                <input type="checkbox" id="logo" name="logo" th:field="*{logo}">
+                <label for="logo">Upload a logo</label>
+            </div>
+            <div class="form-group">
+                <label>Using Green Screen Technology:</label>
+                <input type="checkbox" id="greenScreenTechnology" name="greenScreenTechnology" th:field="*{greenScreenTechnology}">
+                <label for="greenScreenTechnology">Enable green screen technology</label>
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
