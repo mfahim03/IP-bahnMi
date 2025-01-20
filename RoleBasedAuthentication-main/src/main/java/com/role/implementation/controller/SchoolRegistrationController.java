@@ -5,30 +5,35 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
 @Controller
 public class SchoolRegistrationController {
 
-    // Display the School Registration Form
+    // Show the registration form with an empty Registration object
     @GetMapping("/schoolRegistration")
     public String showRegistrationForm(Model model) {
         model.addAttribute("registration", new Registration());
-        return "registration"; // The Thymeleaf template for registration form
+        return "registration"; // Thymeleaf template name
     }
 
-    // Handle the form submission for School Registration
+    // Handle form submission and registration processing
     @PostMapping("/register")
-    public String registerSchool(Registration registration, Model model) {
-        // Save registration to the database or perform necessary operations here
-        // For now, we simulate a successful registration
+    public String registerSchool(@Validated Registration registration, BindingResult bindingResult, Model model) {
+        // If there are validation errors, return to the registration form
+        if (bindingResult.hasErrors()) {
+            return "registration"; // Return to the registration page with errors
+        }
 
-        // Adding a success message to the model to be displayed in the view
+        // Simulate saving the data or any required processing
+        // For example: save to the database or perform some business logic
+        System.out.println("Registration submitted: " + registration);
+
+        // Add success message and reset the form
         model.addAttribute("success", true);
+        model.addAttribute("registration", new Registration()); // Reset form data
 
-        // Reset the form by passing a new instance of Registration
-        model.addAttribute("registration", new Registration());
-
-        // Redirecting to the same page with a success message
-        return "redirect:/schoolRegistration?success=true";
+        return "registration"; // Return the same page with cleared form
     }
 }

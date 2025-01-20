@@ -3,9 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration School</title>
+    <title>School Registration</title>
     <link rel="stylesheet" type="text/css" href="/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Style for the submit button */
+        .btn-sidebar-color {
+            background-color: #2d3e50; /* Sidebar color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-sidebar-color:hover {
+            background-color: #1a2b36; /* Darker shade for hover effect */
+        }
+
+        /* Style for the modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Additional styling for file upload sections */
+        .upload-section {
+            margin-top: 10px;
+            display: none; /* Hidden by default */
+        }
+    </style>
+    <script>
+        // Function to handle form submission
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Prevent form from submitting the traditional way
+
+            // Show the modal with success message
+            document.getElementById('successModal').style.display = 'block';
+
+            // Reset form fields
+            event.target.reset();
+
+            // Hide all proof sections
+            var proofSections = document.querySelectorAll('.upload-section');
+            proofSections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+
+            // Uncheck all checkboxes
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = false;
+            });
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        // Function to toggle proof sections based on checkbox state
+        function toggleProofSection(checkboxId, proofSectionId) {
+            var checkbox = document.getElementById(checkboxId);
+            var proofSection = document.getElementById(proofSectionId);
+            if (checkbox.checked) {
+                proofSection.style.display = 'block';
+            } else {
+                proofSection.style.display = 'none';
+            }
+        }
+    </script>
 </head>
 <body>
     <!-- Sidebar -->
@@ -17,7 +118,7 @@
         <a href="/profile">Profile</a>
         <a href="/activity">Activity</a>
         <a href="/shootingEquipment">Shooting Equipment</a>
-        <a href="/schoolRegistration">School Registration</a> <!-- Added School Registration link -->
+        <a href="/schoolRegistration">School Registration</a>
         <a href="/video">Content</a>
         <a href="/logout">Logout</a>
     </div>
@@ -26,54 +127,116 @@
     <div class="content">
         <h1>School Registration Form</h1>
 
-        <!-- Success Message -->
-        <div th:if="${param.success}">
-            <p class="success-message">Registration successful!</p>
-        </div>
-
         <!-- Registration Form -->
-        <form action="/register" method="post" th:object="${registration}">
+        <form onsubmit="handleFormSubmit(event)" method="post" th:object="${registration}" enctype="multipart/form-data">
+            <!-- School Name -->
             <div class="form-group">
                 <label for="schoolName">School Name:</label>
                 <input type="text" id="schoolName" name="schoolName" th:field="*{schoolName}" required>
             </div>
+
+            <!-- Branding -->
             <div class="form-group">
-                <label>Branding:</label>
-                <input type="checkbox" id="branding" name="branding" th:field="*{branding}">
-                <label for="branding">Corner/mini studio/TV studio</label>
+                <label for="branding">
+                    Branding (Corner/mini studio/TV studio)
+                    <input type="checkbox" id="branding" name="branding" th:field="*{branding}" onclick="toggleProofSection('branding', 'proofBrandingSection')">
+                </label>
+                <div id="proofBrandingSection" class="upload-section">
+                    <label for="proofBranding">Proof of Branding (Image/Video/Link):</label>
+                    <input type="file" id="proofBrandingImage" name="proofBrandingImage" accept="image/*,video/*">
+                    <input type="url" id="proofBrandingLink" name="proofBrandingLink" placeholder="Enter URL for proof">
+                </div>
             </div>
+
+            <!-- In-school Recording -->
             <div class="form-group">
-                <label>In-school Recording:</label>
-                <input type="checkbox" id="inSchoolRecording" name="inSchoolRecording" th:field="*{inSchoolRecording}">
-                <label for="inSchoolRecording">Enable in-school recording</label>
+                <label for="inSchoolRecording">
+                    Enable In-school Recording
+                    <input type="checkbox" id="inSchoolRecording" name="inSchoolRecording" th:field="*{inSchoolRecording}" onclick="toggleProofSection('inSchoolRecording', 'proofInSchoolRecordingSection')">
+                </label>
+                <div id="proofInSchoolRecordingSection" class="upload-section">
+                    <label for="proofInSchoolRecording">Proof of In-school Recording (Image/Video/Link):</label>
+                    <input type="file" id="proofInSchoolRecordingImage" name="proofInSchoolRecordingImage" accept="image/*,video/*">
+                    <input type="url" id="proofInSchoolRecordingLink" name="proofInSchoolRecordingLink" placeholder="Enter URL for proof">
+                </div>
             </div>
+
+            <!-- Upload on YouTube -->
             <div class="form-group">
-                <label>Upload on YouTube:</label>
-                <input type="checkbox" id="uploadOnYoutube" name="uploadOnYoutube" th:field="*{uploadOnYoutube}">
-                <label for="uploadOnYoutube">Enable YouTube uploads</label>
+                <label for="uploadOnYoutube">
+                    Enable YouTube Uploads
+                    <input type="checkbox" id="uploadOnYoutube" name="uploadOnYoutube" th:field="*{uploadOnYoutube}" onclick="toggleProofSection('uploadOnYoutube', 'proofYoutubeUploadSection')">
+                </label>
+                <div id="proofYoutubeUploadSection" class="upload-section">
+                    <label for="proofYoutubeUpload">Proof of YouTube Upload (Image/Video/Link):</label>
+                    <input type="file" id="proofYoutubeUploadImage" name="proofYoutubeUploadImage" accept="image/*,video/*">
+                    <input type="url" id="proofYoutubeUploadLink" name="proofYoutubeUploadLink" placeholder="Enter URL for proof">
+                </div>
             </div>
+
+            <!-- Recording Inside/Outside School -->
             <div class="form-group">
-                <label>Recording Inside and Outside School:</label>
-                <input type="checkbox" id="recordingInsideOutsideSchool" name="recordingInsideOutsideSchool" th:field="*{recordingInsideOutsideSchool}">
-                <label for="recordingInsideOutsideSchool">Allow recordings inside and outside school</label>
+                <label for="recordingInsideOutsideSchool">
+                    Recording Inside/Outside School
+                    <input type="checkbox" id="recordingInsideOutsideSchool" name="recordingInsideOutsideSchool" th:field="*{recordingInsideOutsideSchool}" onclick="toggleProofSection('recordingInsideOutsideSchool', 'proofRecordingInsideOutsideSection')">
+                </label>
+                <div id="proofRecordingInsideOutsideSection" class="upload-section">
+                    <label for="proofRecordingInsideOutside">Proof of Recording Inside/Outside School (Image/Video/Link):</label>
+                    <input type="file" id="proofRecordingInsideOutsideImage" name="proofRecordingInsideOutsideImage" accept="image/*,video/*">
+                    <input type="url" id="proofRecordingInsideOutsideLink" name="proofRecordingInsideOutsideLink" placeholder="Enter URL for proof">
+                </div>
             </div>
+
+            <!-- Collaborate with Agencies -->
             <div class="form-group">
-                <label>Collaborate with External Agencies:</label>
-                <input type="checkbox" id="collaborateWithAgencies" name="collaborateWithAgencies" th:field="*{collaborateWithAgencies}">
-                <label for="collaborateWithAgencies">Enable collaboration</label>
+                <label for="collaborateWithAgencies">
+                    Collaborate with Agencies
+                    <input type="checkbox" id="collaborateWithAgencies" name="collaborateWithAgencies" th:field="*{collaborateWithAgencies}" onclick="toggleProofSection('collaborateWithAgencies', 'proofCollaborateWithAgenciesSection')">
+                </label>
+                <div id="proofCollaborateWithAgenciesSection" class="upload-section">
+                    <label for="proofCollaborateWithAgencies">Proof of Collaboration with Agencies (Image/Video/Link):</label>
+                    <input type="file" id="proofCollaborateWithAgenciesImage" name="proofCollaborateWithAgenciesImage" accept="image/*,video/*">
+                    <input type="url" id="proofCollaborateWithAgenciesLink" name="proofCollaborateWithAgenciesLink" placeholder="Enter URL for proof">
+                </div>
             </div>
+
+            <!-- Logo -->
             <div class="form-group">
-                <label>Logo:</label>
-                <input type="checkbox" id="logo" name="logo" th:field="*{logo}">
-                <label for="logo">Upload a logo</label>
+                <label for="logo">
+                    Upload Logo
+                    <input type="checkbox" id="logo" name="logo" th:field="*{logo}" onclick="toggleProofSection('logo', 'proofLogoSection')">
+                </label>
+                <div id="proofLogoSection" class="upload-section">
+                    <label for="proofLogo">Proof of Logo Upload (Image/Video/Link):</label>
+                    <input type="file" id="proofLogoImage" name="proofLogoImage" accept="image/*,video/*">
+                    <input type="url" id="proofLogoLink" name="proofLogoLink" placeholder="Enter URL for proof">
+                </div>
             </div>
+
+            <!-- Green Screen Technology -->
             <div class="form-group">
-                <label>Using Green Screen Technology:</label>
-                <input type="checkbox" id="greenScreenTechnology" name="greenScreenTechnology" th:field="*{greenScreenTechnology}">
-                <label for="greenScreenTechnology">Enable green screen technology</label>
+                <label for="greenScreenTechnology">
+                    Enable Green Screen Technology
+                    <input type="checkbox" id="greenScreenTechnology" name="greenScreenTechnology" th:field="*{greenScreenTechnology}" onclick="toggleProofSection('greenScreenTechnology', 'proofGreenScreenTechnologySection')">
+                </label>
+                <div id="proofGreenScreenTechnologySection" class="upload-section">
+                    <label for="proofGreenScreenTechnology">Proof of Green Screen Technology (Image/Video/Link):</label>
+                    <input type="file" id="proofGreenScreenTechnologyImage" name="proofGreenScreenTechnologyImage" accept="image/*,video/*">
+                    <input type="url" id="proofGreenScreenTechnologyLink" name="proofGreenScreenTechnologyLink" placeholder="Enter URL for proof">
+                </div>
             </div>
-            <button type="submit" class="btn">Submit</button>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-sidebar-color">Submit</button>
         </form>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p>Registration Successful!</p>
+            </div>
+        </div>
     </div>
 </body>
 </html>
