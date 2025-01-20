@@ -1,31 +1,58 @@
-package com.role.implementation.DTO;
+package com.role.implementation.model;
 
-public class SchoolRegistrationDTO {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "school_registration")
+public class SchoolRegistration {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String schoolName;
+
     private boolean branding;
     private String proofBrandingImage;
     private String proofBrandingLink;
+
     private boolean inSchoolRecording;
     private String proofInSchoolRecordingImage;
     private String proofInSchoolRecordingLink;
+
     private boolean uploadOnYoutube;
     private String proofYoutubeUploadImage;
     private String proofYoutubeUploadLink;
+
     private boolean recordingInsideOutsideSchool;
     private String proofRecordingInsideOutsideImage;
     private String proofRecordingInsideOutsideLink;
+
     private boolean collaborateWithAgencies;
     private String proofCollaborateWithAgenciesImage;
     private String proofCollaborateWithAgenciesLink;
+
     private boolean logo;
     private String proofLogoImage;
     private String proofLogoLink;
+
     private boolean greenScreenTechnology;
     private String proofGreenScreenTechnologyImage;
     private String proofGreenScreenTechnologyLink;
 
     // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getSchoolName() {
         return schoolName;
     }
